@@ -2,37 +2,37 @@
 using namespace std;
 
 void solve() {
-    unordered_set<int> used;
     vector<int> v;
-
     int x;
+
     while(cin >> x) {
-        if(used.count(x) == 0) {
-            v.push_back(x);
-            used.insert(x);
-        }
+        if(v.empty() || v.back() != x) v.push_back(x);
     }
 
-    if(used.size() == 1) {
+    if(v.size() == 1) {
         cout << 0;
         return;
     }
 
-    int n = v.size();
-    int best_bukit = -1e9;
-    int best_lembah = 1e9;
+    vector<int> extreme;
 
-    for(int i = 0; i < n; i++) {
-        if(i > 0 && i < n - 1) {
-            if(v[i] > v[i - 1] && v[i] > v[i + 1] && v[i] > best_bukit) best_bukit = v[i];
-            else if(v[i] < v[i - 1] && v[i] < v[i + 1] && v[i] < best_lembah) best_lembah = v[i];
-        } else if(i == 0) {
-            if(v[i] > v[i + 1] && v[i] > best_bukit) best_bukit = v[i];
-            else if(v[i] < v[i + 1] && v[i] < best_lembah) best_lembah = v[i];
-        } else {
-            if(v[i] > v[i - 1] && v[i] > best_bukit) best_bukit = v[i];
-            else if(v[i] < v[i - 1] && v[i] < best_lembah) best_lembah = v[i];
-        }
+    int n = v.size();
+
+    extreme.push_back(v[0]);
+
+    for(int i = 1; i < n - 1; i++) {
+        if(v[i] > v[i + 1] && v[i] > v[i - 1]) extreme.push_back(v[i]);
+        else if(v[i] < v[i + 1] && v[i] < v[i - 1]) extreme.push_back(v[i]);
+    }
+
+    extreme.push_back(v[n - 1]);
+
+    int best_lembah = 1e9;
+    int best_bukit = -1e9;
+
+    for(auto el : extreme) {
+        best_bukit = max(best_bukit, el);
+        best_lembah = min(best_lembah, el);
     }
 
     int diff = best_bukit - best_lembah;
