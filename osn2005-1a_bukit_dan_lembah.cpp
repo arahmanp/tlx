@@ -13,6 +13,11 @@ void solve() {
         }
     }
 
+    if(used.size() == 1) {
+        cout << 0;
+        return;
+    }
+
     int n = v.size();
     int best_bukit = -1e9;
     int best_lembah = 1e9;
@@ -32,7 +37,7 @@ void solve() {
 
     int diff = best_bukit - best_lembah;
 
-    cout << best_bukit << ' ' << best_lembah << ' ' << diff;
+    cout << diff;
 }
 
 int main() {
