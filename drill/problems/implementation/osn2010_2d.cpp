@@ -1,0 +1,1 @@
+// https://tlx.toki.id/problems/osn-2010/2D
