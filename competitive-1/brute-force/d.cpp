@@ -10,13 +10,13 @@ int dx[] = {-1, 0, 1, 0};
 int dy[] = {0, 1, 0, -1};
 
 void search(int x, int y, int c) {
-  if(x >= 0 && x < m && y >= 0 && y < n) {
-    if(!visited[x][y]) {
-      if(grid[x][y] == c) {
+  if (x >= 0 && x < m && y >= 0 && y < n) {
+    if (!visited[x][y]) {
+      if (grid[x][y] == c) {
         t++;
         visited[x][y] = true;
 
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
           search(x + dx[i], y + dy[i], c);
         }
       }
@@ -29,8 +29,8 @@ int main() {
 
   cin >> m >> n;
 
-  for(int i = 0; i < m; i++) {
-    for(int j = 0; j < n; j++) {
+  for (int i = 0; i < m; i++) {
+    for (int j = 0; j < n; j++) {
       cin >> grid[i][j];
       visited[i][j] = false;
     }
@@ -42,7 +42,7 @@ int main() {
 
   search(b, k, grid[b][k]);
 
-  cout << t * (t-1) << '\n';
+  cout << t * (t - 1) << '\n';
 
   return 0;
 }
